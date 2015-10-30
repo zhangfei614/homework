@@ -1,44 +1,46 @@
-#include<iostream>
-#include<cstring>
+#include<stdio.h>
+#include<string.h>
 #define MAX_LENGTH 28
-
-using namespace std;
-
+#define RIGHT 1
+#define LEFT 0
 char* generate_string_stj(int* m,int n,char* r){
-    for(int i=1;i<=n;i++){
-        char t='a'+n-i;
+    int i;
+
+    memset((void*)r,0,sizeof(char)*MAX_LENGTH);
+    for(i=1;i<=n;i++){
+        char t='a'+n-i;             // filled character
         int flag = -1;
-        if(i == n || i== n-1)       //如果我为1，2直接定义为向左
-            flag = 0;
-        if((n+1-i)%2==0){
-            if((m[i+1]+m[i+2])%2!=0){
-                flag = 1;
+        if(i == n || i== n-1)       // if it is 1 or 2,let it be left
+            flag = LEFT;
+        if((n+1-i)%2==0){           // if it is an even number
+            if((m[i+1]+m[i+2])%2!=0){       //if b(i-1)+b(i-2) is an odd number,let it be right
+                flag = RIGHT;
             }else{
-                flag = 0;
+                flag = LEFT;                //else,let it be left
             }
         }else{
-            if(m[i+1]%2!=0){
-                flag = 1;
+            if(m[i+1]%2!=0){        // if it is an odd number
+                flag = 1;                   //if b(i) is an odd number,let it be right
             }else{
-                flag = 0;
+                flag = 0;                   //else,let it be left
             }
         }
-        int sum = -1;
+        int count = -1;             //to count the blank position
         int j;
-        if(flag == 1){
+        if(flag == RIGHT){          //to right
             for(j=0;j<n;j++){
                 if(r[j]==0){
-                    sum++;
-                    if(sum==m[i])
+                    count++;
+                    if(count==m[i])
                         break;
                 }
             }
             r[j]=t;
-        }else{
+        }else{                      //to left
             for(j=n-1;j>=0;j--){
                 if(r[j]==0){
-                    sum++;
-                    if(sum==m[i])
+                    count++;
+                    if(count==m[i])
                         break;
                 }
             }
@@ -47,6 +49,7 @@ char* generate_string_stj(int* m,int n,char* r){
     }
     return r;
 }
+
 int* next_mid_stj(int* mid,int n){
     mid[1]+=1;
     int i=1;
@@ -59,33 +62,38 @@ int* next_mid_stj(int* mid,int n){
     }
     return mid;
 }
+
 int isLast_stj(int* mid,int n){
-    for(int i=1;i<n;i++){
+    int i;
+    for(i=1;i<n;i++){
         if(mid[i]<=mid[i+1]) return 0;
     }
     return 1;
 }
+
 void stj_permutation(int n){
+
     int mid[MAX_LENGTH];
     char result[MAX_LENGTH];
+
     char* r = result;
     int*  m = mid;
     memset((void*)m,0,sizeof(int)*MAX_LENGTH);
+
     int sum = 0;
-    while(true){
-        memset((void*)r,0,sizeof(char)*MAX_LENGTH);
+    while(1){
+
         r = generate_string_stj(m,n,r);
-        cout<<r<<endl;
+        printf("%s\n",r);
         sum++;
         if(isLast_stj(m,n))
             break;
         m=next_mid_stj(m,n);
     }
-    cout<<sum<<endl;
+    printf("%d\n",sum);
 }
 
 int main(){
-    stj_permutation(7);
+    stj_permutation(25);
     return 0;
 }
-

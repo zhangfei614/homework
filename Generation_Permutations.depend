@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1445867840 source:c:\zf\codeblocks\generation\generation_permutations\main.cpp
+1446017532 source:c:\zf\codeblocks\generation\generation_permutations\main.cpp
 	<iostream>
 
 1445948670 source:f:\git\generating_permutations\dictionary.cpp
@@ -10,4 +10,15 @@
 
 1445948970 source:f:\git\generating_permutations\stj.cpp
 	<iostream>
+
+1446203278 source:c:\zf\codeblocks\generation\generation_permutations\dictionary.cpp
+	<iostream>
+
+1446205519 source:c:\zf\codeblocks\generation\generation_permutations\stj.cpp
+	<iostream>
+	<cstring>
+
+1446212074 source:c:\zf\codeblocks\generation\generation_permutations\dictionary.c
+	<stdio.h>
+	<string.h>
 
