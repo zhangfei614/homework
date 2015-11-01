@@ -1,9 +1,10 @@
 #include<stdio.h>
 #include<string.h>
+#include<time.h>
 #define MAX_LENGTH 28
 #define RIGHT 1
 #define LEFT 0
-char* generate_string_stj(int* m,int n,char* r){
+char* generate_string_sjt(int* m,int n,char* r){
     int i;
 
     memset((void*)r,0,sizeof(char)*MAX_LENGTH);
@@ -50,7 +51,7 @@ char* generate_string_stj(int* m,int n,char* r){
     return r;
 }
 
-int* next_mid_stj(int* mid,int n){
+int* next_mid_sjt(int* mid,int n){
     mid[1]+=1;
     int i=1;
     int weight = n-i+1;
@@ -63,7 +64,7 @@ int* next_mid_stj(int* mid,int n){
     return mid;
 }
 
-int isLast_stj(int* mid,int n){
+int isLast_sjt(int* mid,int n){
     int i;
     for(i=1;i<n;i++){
         if(mid[i]<=mid[i+1]) return 0;
@@ -71,7 +72,7 @@ int isLast_stj(int* mid,int n){
     return 1;
 }
 
-void stj_permutation(int n){
+void sjt_permutation(int n){
 
     int mid[MAX_LENGTH];
     char result[MAX_LENGTH];
@@ -83,17 +84,26 @@ void stj_permutation(int n){
     int sum = 0;
     while(1){
 
-        r = generate_string_stj(m,n,r);
-        printf("%s\n",r);
+        r = generate_string_sjt(m,n,r);
+        //printf("%s\n",r);
         sum++;
-        if(isLast_stj(m,n))
+        if(isLast_sjt(m,n))
             break;
-        m=next_mid_stj(m,n);
+        m=next_mid_sjt(m,n);
     }
-    printf("%d\n",sum);
+    //printf("%d\n",sum);
 }
 
 int main(){
-    stj_permutation(25);
+    int n;
+    clock_t start,finish;
+    double usedTime;
+    while(scanf("%d",&n)==1){
+        start = clock();
+        sjt_permutation(n);
+        finish = clock();
+        usedTime = (double)(finish-start)/CLOCKS_PER_SEC;
+        printf("%f\n",usedTime);
+    }
     return 0;
 }

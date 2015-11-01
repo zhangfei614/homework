@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<string.h>
+#include<time.h>
 #define MAX_LENGTH 28
 
 char candidate[MAX_LENGTH];
@@ -56,26 +57,31 @@ void dictionary_permutation(int n)
 
     char* r = result;
     int*  m = mid;
-    memset((void*)m,0,sizeof(int)*MAX_LENGTH);   //ÖÐ½éÊýÎª0
+    memset((void*)m,0,sizeof(int)*MAX_LENGTH);   //
 
     int sum = 0;
 
     while(1){
         r = generate_string_dic(m,n,r);
-        printf("%s\n",r);
+        //printf("%s\n",r);
         sum++;
         if(isLast_dic(m,n))
             break;
         m=next_mid_dic(m);
     }
-    printf("%d\n",sum);
+    //printf("%d\n",sum);
 }
 
-//int main(){
-//    int n;
-//    while(scanf("%d",&n)){
-//        dictionary_permutation(n);
-//    }
-//    return 0;
-//}
-
+int main(){
+    int n;
+    clock_t start,finish;
+    double usedTime;
+    while(scanf("%d",&n)==1){
+        start = clock();
+        dictionary_permutation(n);
+        finish = clock();
+        usedTime = (double)(finish-start)/CLOCKS_PER_SEC;
+        printf("%f\n",usedTime);
+    }
+    return 0;
+}
