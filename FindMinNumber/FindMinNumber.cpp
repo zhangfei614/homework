@@ -1,11 +1,9 @@
 #include<iostream>
 #include<fstream>
 #include<cstdlib>
-#include<cstdio>
 #include<cstring>
-#include<ctime>
+#include<chrono>
 #include "config.h"
-#define BYTE_LENGTH 8
 using namespace std;
 
 void print_bitmap(unsigned char* bitmap,unsigned int bytes_length){
@@ -24,9 +22,7 @@ void print_bitmap(unsigned char* bitmap,unsigned int bytes_length){
 
 int main(){
 
-    clock_t start,finish;
-    start = clock();
-    
+    auto start = chrono::system_clock::now();
         
     unsigned int MAX_RESULT;
     if(NUMBERS_COUNT < MAX_NUMBER){
@@ -34,7 +30,6 @@ int main(){
     }else{
         MAX_RESULT = MAX_NUMBER;
     }
-    
     unsigned char* bitmap;
     unsigned int bytes_length = MAX_RESULT/BYTE_LENGTH + 1;
     bitmap =(unsigned char*) malloc(bytes_length);
@@ -52,27 +47,30 @@ int main(){
         if(t==min) min++;
     }
     // print_bitmap(bitmap,bytes_length);
-    for(;min<MAX_RESULT;min++){
-        if(!(bitmap[min/BYTE_LENGTH] & (1<<(min%BYTE_LENGTH))))
-            break;
-    }
-    // for(i=min/BYTE_LENGTH;i<bytes_length;i++){
-    //     if(bitmap[i] ^ 0xff){
-    //         int j;
-    //         for(j=0;j<BYTE_LENGTH;j++){
-    //             if(!(bitmap[i] & (1<<j))) break;
-    //         }
-    //         min = i*BYTE_LENGTH+j;
+    // cout<<min<<endl;
+    // for(;min<MAX_RESULT;min++){
+    //     if(!(bitmap[min/BYTE_LENGTH] & (1<<(min%BYTE_LENGTH))))
     //         break;
-    //     }else{
-    //         continue;
-    //     }
     // }
-    cout<<min<<endl;
+    for(i=min/BYTE_LENGTH;i<bytes_length;i++){
+        if(bitmap[i] ^ 0xff){
+            int j;
+            for(j=0;j<BYTE_LENGTH;j++){
+                if(!(bitmap[i] & (1<<j))) break;
+            }
+            min = i*BYTE_LENGTH+j;
+            break;
+        }else{
+            continue;
+        }
+    }
+    cout<<"The min number is " << min<<endl;
     delete(bitmap);
     fin.close();
     
-    finish = clock();
-    cout<<"The tiem of this program is "<<(finish-start)<<endl;
+    auto end = chrono::system_clock::now();
+    auto diff = end-start;
+    auto millisec = chrono::duration_cast<chrono::milliseconds>(diff);
+    cout<<"The tiem of this program is "<<millisec.count()<<"ms"<<endl;
     return 0;
 }

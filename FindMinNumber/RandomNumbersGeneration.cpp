@@ -9,9 +9,11 @@ using namespace std;
 
 int main(){
 	
-	ofstream fout("data.in",ios::out|ios::binary);	//open the file
+	//open the file
+	ofstream fout("data.in",ios::out|ios::binary);	
 	
-	default_random_engine dre(time(NULL));	//generate the engine by time
+	//generate the engine by time
+	default_random_engine dre(time(NULL));	
 	
 	uniform_int_distribution<unsigned int> uid(0,MAX_NUMBER);	
 	
