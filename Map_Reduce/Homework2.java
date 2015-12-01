@@ -64,33 +64,39 @@ public void reduce(Record key, Iterator<Record> values, TaskContext context) thr
 IOException {
 	List<Long> orderIds  = new ArrayList<Long>();
 	String name = null;
-	// boolean isUK = false;
+	boolean isUK = false;
 	while(values.hasNext()){
 		Record value = values.next();
 		long tag = key.getBigint(1);
 		if(tag == 0){
 			name = value.getString(0);
-			// if(value.getString(1).equals("UK")){
-			// 	isUK = true;
-			// }
+			if(value.getString(1).equals("UK")){
+				isUK = true;
+			}
 		}else{
 			orderIds.add(value.getBigint(2));
 		}
 	}
 	if(name != null){
-		result.set(0,name);
-		if(orderIds.isEmpty()){
+		// result.set(0,name);
+		if(isUK){
+			if(orderIds.isEmpty()){
+				result.set(0,name);
+				result.set(1,null);
+				context.write(result);
+			}else{
+				for(Long orderId:orderIds){
+					result.set(0,name);
+					result.set(1,orderId);
+					context.write(result);
+				}
+			}
+		}else{
+			result.set(0,name);
 			result.set(1,null);
 			context.write(result);
-		}else{
-			for(Long orderId:orderIds){
-				result.set(1,orderId.toString());
-				context.write(result);
-			}
 		}
 	}
-	
-	
 }
 // private void outputCustomer(String name, TaskContext context) throws IOException {
 	
