@@ -23,18 +23,18 @@ bool Server::UpdateTable(const string& tableName, const string& content)
 		if(!(allWorkerPtrs[i]->UpdateTable(tableName,content))){
 			rollback = true;
 			// cout<<"Worker"<<i<<" failed"<<endl;
-			break;
+			// break;
 		}
 		// cout<<"Worker"<<i<<" success"<<endl;
 	}
 	
 	//如果需要回滚，对之前的workers进行回滚
 	if(rollback){
-		for(int j=0;j<i;j++){
-			if(!(allWorkerPtrs[j]->rollback(tableName))){
+		for(i=0;i<size;i++){
+			if(!(allWorkerPtrs[i]->rollback(tableName))){
 				return false;
 			}
-			// cout<<"Worker"<<j<<" rollback"<<endl;
+			cout<<"Worker"<<i<<" rollback"<<endl;
 		}
 		return false;
 	}
@@ -44,7 +44,7 @@ bool Server::UpdateTable(const string& tableName, const string& content)
 		if(!(allWorkerPtrs[i]->commit())){
 			return false;
 		}
-		// cout<<"Worker"<<i<<" commit"<<endl;
+		cout<<"Worker"<<i<<" commit"<<endl;
 	}
 	
 	//更新meta信息
@@ -66,14 +66,15 @@ bool Worker::UpdateTable(const string& tableName, const string& content)
 		if(!CreateFile(fileId)){
 			return false;
 		}
+		newFileIds.push_back(fileId);
+		//更新meta信息
+		mTableFiles[tableName] = newFileIds;
+		
 		if(!WriteToFile(fileId,spContent[i])){
 			return false;
 		}
-		newFileIds.push_back(fileId);
 	}
 	
-	//更新meta信息
-	mTableFiles[tableName] = newFileIds;
 	
 	//返回正确结果
 	return true;

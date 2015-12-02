@@ -15,13 +15,13 @@ public:
     {}
 
 private:    
-    bool CreateFile(const std::string& fileId)
-    {
-        return false;
-    }
-    // bool WriteToFile(const std::string& fileId, const std::string& content){
+    // bool CreateFile(const std::string& fileId)
+    // {
     //     return false;
     // }
+    bool WriteToFile(const std::string& fileId, const std::string& content){
+        return false;
+    }
 };
 
 }
