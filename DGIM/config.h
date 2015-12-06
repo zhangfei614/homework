@@ -1,0 +1,2 @@
+#define RANDOM_NUMBERS 1000000
+#define MAX_NUMBER 256
