@@ -1,1 +1,1 @@
-Program('sum',['sum.cpp','DGIM.cpp'])
+Program('sum_random',['sum_random.cpp','DGIM.cpp'],CCFLAGS='-std=c++11')

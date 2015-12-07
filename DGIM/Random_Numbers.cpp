@@ -3,14 +3,14 @@
 #include<fstream>
 #include<cstdlib>
 
-#define RANDOM_NUMBERS 1000000
+#define RANDOM_NUMBERS 10000000
 #define MAX_NUMBER 256
 
 using namespace std;
 
 int main(){
 	
-	ofstream fout("data.in",ios::out|ios::binary);
+	ofstream fout("data2.in",ios::out|ios::binary);
 	
 	srand(time(NULL));
 	

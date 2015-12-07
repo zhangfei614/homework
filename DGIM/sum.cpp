@@ -2,18 +2,18 @@
 #include<fstream>
 
 
-#define lgMAX 8
-#define rMAX  50
-#define WINDOW_LENGTH 100000
-#define SLOT_LENGTH 1000
-#define ESTIMATE_LENGTH 50000
+#define lgMAX 8		//输入数2进制位长度
+#define rMAX  4		//最多允许同时存在rMAX个桶
+#define WINDOW_LENGTH 1000000	//窗口长度
+#define SLOT_LENGTH 10000		//当输入SLOT_LEGNTH个数时进行估计
+#define ESTIMATE_LENGTH 500000	//估计最近的ESTIMATE_LENGTH个数的和
 
 #define BITV(x,i) ((x>>i)&1)
 
 using namespace std;
 
 int main(){
-	ifstream fin("data.in",ios::in|ios::binary);
+	ifstream fin("data2.in",ios::in|ios::binary);
 	
 	//生成lgMAX个DGIM
 	vector<DGIM> dgims;
