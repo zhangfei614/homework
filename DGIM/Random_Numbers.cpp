@@ -2,12 +2,15 @@
 #include<ctime>
 #include<fstream>
 #include<cstdlib>
-#include"config.h"
+
+#define RANDOM_NUMBERS 1000000
+#define MAX_NUMBER 256
+
 using namespace std;
 
 int main(){
 	
-	ofstream fout("test.in",ios::out|ios::binary);
+	ofstream fout("data.in",ios::out|ios::binary);
 	
 	srand(time(NULL));
 	

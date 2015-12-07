@@ -1,1 +1,1 @@
-Program('test',['test.cpp','DGIM.cpp'])
+Program('sum',['sum.cpp','DGIM.cpp'])

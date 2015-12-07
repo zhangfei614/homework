@@ -15,7 +15,7 @@ using namespace std;
 int main(){
 	ifstream fin("test.in",ios::in|ios::binary);
 	
-	DGIM d(5,Nt,7);
+	DGIM d(10,Nt);
 	unsigned int v;
 	for(int i=0;i<Nt;i++){
 		fin>>v;
