@@ -50,3 +50,7 @@ Temporary Items
 # Maven
 log/
 target/
+
+#test
+.csv
+.txt
