@@ -25,6 +25,7 @@ public class WordCountPlanA implements Runnable {
     @Override
     public void run() {
         try {
+            long startTime = System.currentTimeMillis();
             //map
             File inFile = new File(this.inputFileName);
             File mapResultFile = File.createTempFile("MapResult","csv");
@@ -72,6 +73,8 @@ public class WordCountPlanA implements Runnable {
 
             reader.close();
             writer.close();
+
+            System.out.println("Thread "+Thread.currentThread().getName()+" run time:"+(System.currentTimeMillis()-startTime));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -52,5 +52,7 @@ log/
 target/
 
 #test
-.csv
-.txt
+*.csv
+*.txt
+*/apidocs/*
+*.zip

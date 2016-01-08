@@ -12,9 +12,6 @@ import java.util.Date;
 public class RecordImpl implements Record{
     private final Object[] values;
 
-    public RecordImpl(int n){
-        this.values = new Object[n];
-    }
 
     public RecordImpl(Object[] values){
         this.values = values;
