@@ -13,7 +13,7 @@ import java.io.*;
 public class TestPlanA {
     public static void main(String args[]) throws IOException {
         File in = new File("/home/zhangfei/code/homework/Archive/src.csv");
-        File out = new File("/home/zhangfei/code/homework/Archive/destPlana.csv");
+        File out = new File("/home/zhangfei/code/homework/Archive/destPlanA.csv");
 
 //        RecordReaderImpl reader = new RecordReaderImpl(new FileInputStream(in));
 //        Record record;

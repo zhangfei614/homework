@@ -14,7 +14,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class JobRunnerImpl extends Configured implements JobRunner {
-  private static Executor executor = Executors.newFixedThreadPool(4);
+//  private static Executor executor = Executors.newFixedThreadPool(4);
 
   @Override public RunningJob submit() throws OdpsException {
     TableInfo[] tableInfos =InputUtils.getTables((JobConf)this.getConf());
@@ -23,7 +23,8 @@ public class JobRunnerImpl extends Configured implements JobRunner {
     String outputFileName = tableInfos[0].getTableName();
 
     RunningJobImpl rj = new RunningJobImpl(new WordCountPlanA(inputFileName,outputFileName));
-    JobRunnerImpl.executor.execute(rj.getTask());
+//    JobRunnerImpl.executor.execute(rj.getTask());
+    rj.getTask().start();
     return rj;
   }
 }

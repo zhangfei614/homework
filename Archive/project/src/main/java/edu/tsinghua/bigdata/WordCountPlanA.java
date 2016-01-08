@@ -15,11 +15,11 @@ import java.io.IOException;
 public class WordCountPlanA implements Runnable {
 
     private final String inputFileName;
-    private final String outptuFileName;
+    private final String outputFileName;
 
-    public WordCountPlanA(String inputFileName, String outptuFileName) {
+    public WordCountPlanA(String inputFileName, String outputFileName) {
         this.inputFileName = inputFileName;
-        this.outptuFileName = outptuFileName;
+        this.outputFileName = outputFileName;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class WordCountPlanA implements Runnable {
             ExternalSort.sort(mapResultFile,sortedFile);
 
             //reduce
-            File outputFile = new File(this.outptuFileName);
+            File outputFile = new File(this.outputFileName);
             reader = new CsvReader(new FileReader(sortedFile));
             writer = new CsvWriter(new FileWriter(outputFile),',');
             String key = null;
