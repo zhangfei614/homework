@@ -109,10 +109,10 @@ public class WordCount {
   }
 
   public static void main(String[] args) throws Exception {
-//    if (args.length != 2) {
-//      System.err.println("Usage: wordcount <in_table> <out_table>");
-//      System.exit(2);
-//    }
+    if (args.length != 2) {
+      System.err.println("Usage: wordcount <in_table> <out_table>");
+      System.exit(2);
+    }
 
 
     JobConf job = new JobConf();
@@ -122,11 +122,11 @@ public class WordCount {
     job.setMapOutputKeySchema(new Column[] { new Column("word", OdpsType.STRING) });
     job.setMapOutputValueSchema(new Column[] { new Column("count", OdpsType.BIGINT) });
 
-    InputUtils.addTable(TableInfo.builder().tableName("/home/zhangfei/code/homework/Archive/test.csv").build(), job);
-    OutputUtils.addTable(TableInfo.builder().tableName("/home/zhangfei/code/homework/Archive/destPlanA.csv").build(), job);
+//    InputUtils.addTable(TableInfo.builder().tableName("/home/zhangfei/code/homework/Archive/test.txt").build(), job);
+//    OutputUtils.addTable(TableInfo.builder().tableName("/home/zhangfei/code/homework/Archive/destPlanA.csv").build(), job);
 
-//    InputUtils.addTable(TableInfo.builder().tableName(args[0]).build(), job);
-//    OutputUtils.addTable(TableInfo.builder().tableName(args[1]).build(), job);
+    InputUtils.addTable(TableInfo.builder().tableName(args[0]).build(), job);
+    OutputUtils.addTable(TableInfo.builder().tableName(args[1]).build(), job);
 
     JobRunner runner = new JobRunnerImpl();
     runner.setConf(job);
