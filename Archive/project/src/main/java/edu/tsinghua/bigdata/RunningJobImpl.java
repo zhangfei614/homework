@@ -14,11 +14,9 @@ public class RunningJobImpl implements RunningJob{
 
     public RunningJobImpl(Runnable task){
         this.task = new Thread(task);
+        this.task.start();
     }
 
-    public Thread getTask(){
-        return this.task;
-    }
     @Override
     public String getInstanceID() {
         return null;
